@@ -1,13 +1,13 @@
 import { FC, useState } from 'react'
 
-import { Box, Typography, Button, TextField } from '@mui/material'
-import { RHFDateField, RHFTextField } from '../../../components/RHF'
+import { Box, Typography, Button } from '@mui/material'
+import { RHFDateField } from '../../../components/RHF'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { StyledPage } from '../../../layouts/StyledPage'
 import { SelectList } from '../../../components/select/SelectList'
-import { PARENT_BUSINESS, QUARTER_INFO, PRODUCTS } from '../../../services/cte'
+import { QUARTER_INFO, PRODUCTS } from '../../../services/cte'
 import { useNavigate } from 'react-router-dom'
 
 type Tier1FormData = {
@@ -50,24 +50,11 @@ export const Tier1Page: FC = () => {
   return (
     <StyledPage>
       <Box>
-        <Typography>TIER1</Typography>
-        {/* <TextField
-          id='date'
-          label='Birthday'
-          type='date'
-          sx={{ width: 220 }}
-          InputLabelProps={{
-            shrink: true
-          }}
-          onChange={(item) => console.log(item.target.value)}
-        /> */}
+        <Typography variant='h6'>TIER1</Typography>
         <Box display={'flex'} alignItems={'center'}>
           <Box>
             <RHFDateField label='' name='date' control={control} />
           </Box>
-          {/* <Box>
-          <RHFTextField label='Texto' name='products' control={control} />
-        </Box> */}
           <Box mb={3} mx={2}>
             <SelectList
               label='Quarter Information'
@@ -85,6 +72,9 @@ export const Tier1Page: FC = () => {
             />
           </Box>
         </Box>
+        <Button variant='outlined' onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+          Atras
+        </Button>
         <Button
           variant='contained'
           onClick={handleSubmit((values) => {

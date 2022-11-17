@@ -1,21 +1,21 @@
 import { FC, useState } from 'react'
 
-import { Box, Typography, Button, TextField, Grid } from '@mui/material'
-import { RHFDateField, RHFTextField } from '../../../components/RHF'
+import { Typography, Button, Grid } from '@mui/material'
+import { RHFTextField } from '../../../components/RHF'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { StyledPage } from '../../../layouts/StyledPage'
 import { SelectList } from '../../../components/select/SelectList'
-import { PARENT_BUSINESS, QUARTER_INFO, PRODUCTS, CROP } from '../../../services/cte'
+import { PARENT_BUSINESS } from '../../../services/cte'
 import { useNavigate } from 'react-router-dom'
 
 type Tier3FormData = {
-  comments: string
+  volume: string
 }
 
 const validationSchema = yup.object().shape({
-  comments: yup.string().required('Este campo es requerido')
+  volume: yup.string()
 })
 
 export const Tier3Page: FC = () => {
@@ -24,13 +24,12 @@ export const Tier3Page: FC = () => {
   const [selectedParentCompany, setSelectedParentCompany] = useState<string>(PARENT_BUSINESS[0])
   const [selectedCompany, setSelectedCompany] = useState<string>(PARENT_BUSINESS[0])
   const [selectedRSPO, setSelectedRSPO] = useState<string>(PARENT_BUSINESS[0])
-  const [selectedCROP, setSelectedCROP] = useState<string>(CROP[0])
 
   const defaultValues: Tier3FormData = {
-    comments: ''
+    volume: ''
   }
 
-  const { handleSubmit, control, watch } = useForm<Tier3FormData>({
+  const { handleSubmit, control } = useForm<Tier3FormData>({
     defaultValues: defaultValues,
     resolver: yupResolver(validationSchema)
   })
@@ -39,30 +38,20 @@ export const Tier3Page: FC = () => {
     console.log({
       selectedParentCompany,
       selectedCompany,
-      comments: data.comments,
-      selectedCROP
+      volume: data.volume,
+      selectedRSPO
     })
 
     navigate('/home/4')
   }
 
-  const watchComments = watch('comments')
-
   return (
     <StyledPage>
       <Grid container justifyContent={'center'}>
         <Grid item xs={12} paddingX={'20px'}>
-          <Typography variant='h6'>TIER2</Typography>
+          <Typography variant='h6'>TIER3</Typography>
         </Grid>
-        <Grid item xs={3} mb={3}>
-          <SelectList
-            label='CROP'
-            selectedItem={CROP[0]}
-            selectableItems={CROP}
-            onChange={(item) => setSelectedCROP(item.target.value)}
-          />
-        </Grid>
-        <Grid item xs={3} mb={3} mx={2}>
+        <Grid item xs={5} mb={3} mr={1}>
           <SelectList
             label='Parent Company'
             selectedItem={PARENT_BUSINESS[0]}
@@ -70,7 +59,10 @@ export const Tier3Page: FC = () => {
             onChange={(item) => setSelectedParentCompany(item.target.value)}
           />
         </Grid>
-        <Grid item xs={3} mb={3}>
+        <Grid item xs={5} ml={1} mt={3}>
+          <RHFTextField label='Volume' name='volume' control={control} />
+        </Grid>
+        <Grid item xs={5} mr={1}>
           <SelectList
             label='Company Name'
             selectedItem={PARENT_BUSINESS[0]}
@@ -78,24 +70,26 @@ export const Tier3Page: FC = () => {
             onChange={(item) => setSelectedCompany(item.target.value)}
           />
         </Grid>
-        <Grid item xs={4} mb={3} mr={3}>
+        <Grid item xs={5} ml={1}>
           <SelectList
             label='RSPO'
             selectedItem={PARENT_BUSINESS[0]}
             selectableItems={PARENT_BUSINESS}
-            onChange={(item) => setSelectedCompany(item.target.value)}
+            onChange={(item) => setSelectedRSPO(item.target.value)}
           />
         </Grid>
-        <Grid item xs={4} mt={3}>
-          <RHFTextField label='Comments' name='comments' control={control} />
-        </Grid>
-        <Grid item xs={12} paddingX={'20px'}>
+        <Grid item xs={12} paddingX={'20px'} mt={3}>
+          <Button variant='outlined' onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+            Atras
+          </Button>
           <Button
             variant='contained'
             onClick={handleSubmit((values) => {
               handleFormSubmit(values)
             })}
-            disabled={watchComments.length === 0 || selectedParentCompany.length === 0 || selectedCompany.length === 0}
+            disabled={
+              selectedParentCompany.length === 0 || selectedCompany.length === 0 || selectedCompany.length === 0
+            }
           >
             Siguiente
           </Button>

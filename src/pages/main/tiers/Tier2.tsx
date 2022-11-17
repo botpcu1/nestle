@@ -1,13 +1,13 @@
 import { FC, useState } from 'react'
 
-import { Box, Typography, Button, TextField, Grid } from '@mui/material'
-import { RHFDateField, RHFTextField } from '../../../components/RHF'
+import { Typography, Button, Grid } from '@mui/material'
+import { RHFTextField } from '../../../components/RHF'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { StyledPage } from '../../../layouts/StyledPage'
 import { SelectList } from '../../../components/select/SelectList'
-import { PARENT_BUSINESS, QUARTER_INFO, PRODUCTS, CROP } from '../../../services/cte'
+import { PARENT_BUSINESS, CROP } from '../../../services/cte'
 import { useNavigate } from 'react-router-dom'
 
 type Tier2FormData = {
@@ -83,19 +83,27 @@ export const Tier2Page: FC = () => {
             label='RSPO'
             selectedItem={PARENT_BUSINESS[0]}
             selectableItems={PARENT_BUSINESS}
-            onChange={(item) => setSelectedCompany(item.target.value)}
+            onChange={(item) => setSelectedRSPO(item.target.value)}
           />
         </Grid>
         <Grid item xs={4} mt={3}>
           <RHFTextField label='Comments' name='comments' control={control} />
         </Grid>
         <Grid item xs={12} paddingX={'20px'}>
+          <Button variant='outlined' onClick={() => navigate(-1)} sx={{ mr: 1 }}>
+            Atras
+          </Button>
           <Button
             variant='contained'
             onClick={handleSubmit((values) => {
               handleFormSubmit(values)
             })}
-            disabled={watchComments.length === 0 || selectedParentCompany.length === 0 || selectedCompany.length === 0}
+            disabled={
+              watchComments.length === 0 ||
+              selectedParentCompany.length === 0 ||
+              selectedCompany.length === 0 ||
+              selectedRSPO.length === 0
+            }
           >
             Siguiente
           </Button>
