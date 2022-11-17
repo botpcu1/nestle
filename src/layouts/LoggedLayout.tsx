@@ -4,7 +4,7 @@ import { LoggedAppBar } from '../components'
 
 export const LoggedLayout = () => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', minHeight: '100vh', bgcolor: '#FFFFFF' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#FFFFFF' }}>
       <LoggedAppBar />
       <Outlet />
     </Box>

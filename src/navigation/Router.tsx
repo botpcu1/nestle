@@ -2,6 +2,7 @@ import { useRoutes } from 'react-router-dom'
 import { LoggedLayout } from '../layouts/LoggedLayout'
 import { SignInPage } from '../pages/authentication'
 import { HomePage } from '../pages/main/Home'
+import { Tier1Page, Tier2Page, Tier3Page, Tier4Page, Tier5Page, Tier6Page } from '../pages/main/tiers'
 
 export default function Router() {
   return useRoutes([
@@ -19,28 +20,28 @@ export default function Router() {
       element: <LoggedLayout />,
       children: [
         {
-          path: '/1',
-          element: <HomePage />
+          path: '/home/1',
+          element: <Tier1Page />
         },
         {
-          path: '/2',
-          element: <HomePage />
+          path: '/home/2',
+          element: <Tier2Page />
         },
         {
-          path: '/3',
-          element: <HomePage />
+          path: '/home/3',
+          element: <Tier3Page />
         },
         {
-          path: '/4',
-          element: <HomePage />
+          path: '/home/4',
+          element: <Tier4Page />
         },
         {
-          path: '/5',
-          element: <HomePage />
+          path: '/home/5',
+          element: <Tier5Page />
         },
         {
-          path: '/6',
-          element: <HomePage />
+          path: '/home/6',
+          element: <Tier6Page />
         }
       ]
     }
