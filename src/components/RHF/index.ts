@@ -1,3 +1,4 @@
+import { RHFDateField } from './RHFDateField'
 import { RHFTextField } from './RHFTextField'
 
-export { RHFTextField }
+export { RHFTextField, RHFDateField }

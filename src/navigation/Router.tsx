@@ -20,6 +20,10 @@ export default function Router() {
       element: <LoggedLayout />,
       children: [
         {
+          path: '/home',
+          element: <HomePage />
+        },
+        {
           path: '/home/1',
           element: <Tier1Page />
         },

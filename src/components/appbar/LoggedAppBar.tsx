@@ -7,12 +7,12 @@ export const LoggedAppBar: FC = () => {
     <Box
       width={'100%'}
       height={'60px'}
-      bgcolor={'#FFF010'}
+      bgcolor={'#0047AB'}
       display={'flex'}
       alignItems={'center'}
       justifyContent={'space-between'}
     >
-      <Typography variant='h4' ml={'60px'}>
+      <Typography variant='h4' ml={'60px'} color={'#FFFFFF'}>
         Nestle
       </Typography>
       <Box
